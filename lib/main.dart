@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MaterialApp(
@@ -13,18 +14,31 @@ void main() {
           backgroundColor: Colors.purple,
         ),
         backgroundColor: Colors.purple.shade400,
-        body: App(),
+        body: BallPage(),
       )));
 }
 
-class App extends StatefulWidget {
+class BallPage extends StatefulWidget {
   @override
-  _AppState createState() => _AppState();
+  _BallPageState createState() => _BallPageState();
 }
 
-class _AppState extends State<App> {
+class _BallPageState extends State<BallPage> {
+  int ballIndex = 1;
+
+  void handlePress() {
+    setState(() {
+      ballIndex = Random().nextInt(5) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: FlatButton(
+          child: Image.asset('images/ball$ballIndex.png'),
+          onPressed: () => handlePress(),
+          padding: EdgeInsets.all(16.0)),
+    );
   }
 }
